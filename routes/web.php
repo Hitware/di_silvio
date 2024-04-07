@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ColaboradorController;
+use App\Http\Controllers\EvaluacionProveedorController;
 use App\Http\Controllers\InsumoController;
 use App\Http\Controllers\PagosController;
 use App\Http\Controllers\PedidoController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\ServicioController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckRole;
+use App\Models\EvaluacionProveedor;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +46,8 @@ Route::middleware(['auth', CheckRole::class . ':1'])->group(function () {
     Route::get('proveedor/ver', [ProveedorController::class,'index'])->name('ver-proveedor');
     Route::get('solicitudes/ver', [ServicioController::class,'verSolicitudes'])->name('ver-solicitudes');
     Route::get('pagos/ver', [PagosController::class,'index'])->name('ver-pagos');
+    Route::get('pedidos', [PedidoController::class,'index'])->name('pedidos');
+    Route::get('proveedor/evaluaciones', [EvaluacionProveedorController::class,'index'])->name('evaluacion-proveedor');
 
 });
 

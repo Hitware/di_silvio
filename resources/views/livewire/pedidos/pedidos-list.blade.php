@@ -28,10 +28,18 @@
                             <th class="p-3">Orden/Pedido</th>
                             <th class="p-3">Factura</th>
                             <th class="p-3">Solicitante</th>
+                            @if(Auth::user()->rol!=6)
                             <th class="p-3">Proveedor</th>
+                            @endif
+                            @if(Auth::user()->rol==1)
+                            <th class="p-3">Actualizar Proveedor</th>
+                            @endif
                             <th class="p-3">Sede</th>
                             <th class="p-3">Fecha</th>
                             <th class="p-3">Estado</th>
+                            @if(Auth::user()->rol==1)
+                            <th class="p-3">Actualizar Estado</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
@@ -76,10 +84,66 @@
                                 @endif
                             </td>
                             <td class="px-4 py-3">{{$pedido->name}}</td>
-                            <td class="px-4 py-3">{{$pedido->nombres_proveedor}}</td>
+                            @if(Auth::user()->rol!=6)
+                            <td class="px-4 py-3">{{ $pedido->nombres_proveedor }}</td>
+                            @endif
+                            @if(Auth::user()->rol==1)
+                            <div wire:ignore>
+                                <td>
+                                    <div class="flex items-center"> <!-- Contenedor flexbox -->
+                                        <select wire:model="proveedor.{{ $pedido->id }}" id="estado_{{ $pedido->id }}"
+                                                class="block rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                                            <option value="">--SELECCIONE--</option>
+                                            @foreach ($proveedores as $proveedor)
+                                                <option value="{{$proveedor->id}}">{{$proveedor->nombres}}</option>
+                                            @endforeach
+                                        </select>
+                                    
+                                        <x-button  wire:click="actualizarProveedor({{ $pedido->id }})">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+                                                <path fill-rule="evenodd" d="M4.755 10.059a7.5 7.5 0 0 1 12.548-3.364l1.903 1.903h-3.183a.75.75 0 1 0 0 1.5h4.992a.75.75 0 0 0 .75-.75V4.356a.75.75 0 0 0-1.5 0v3.18l-1.9-1.9A9 9 0 0 0 3.306 9.67a.75.75 0 1 0 1.45.388Zm15.408 3.352a.75.75 0 0 0-.919.53 7.5 7.5 0 0 1-12.548 3.364l-1.902-1.903h3.183a.75.75 0 0 0 0-1.5H2.984a.75.75 0 0 0-.75.75v4.992a.75.75 0 0 0 1.5 0v-3.18l1.9 1.9a9 9 0 0 0 15.059-4.035.75.75 0 0 0-.53-.918Z" clip-rule="evenodd" />
+                                              </svg>
+                                        </x-button>
+                                    </div>
+                                    
+                                </td>
+                            </div>
+                            @endif
                             <td class="px-4 py-3">{{$pedido->nombre_sede}}</td>
                             <td class="px-4 py-3">{{$pedido->created_at}}</td>
-                            <td class="px-4 py-3">{{$pedido->estado}}</td>
+                            <td class="px-4 py-3">
+                                @if($pedido->estado == '1')
+                                Solicitado
+                                @elseif($pedido->estado == '2')
+                                Cancelado
+                                @elseif($pedido->estado == '3')
+                                Aceptado
+                                @elseif($pedido->estado == '4')
+                                En Proceso
+                                @elseif($pedido->estado == '5')
+                                Pagado
+                                @endif
+                            </td>
+                            @if(Auth::user()->rol==1)
+                            <td>
+                                <div wire:ignore>
+                                    <select wire:change="actualizarEstado({{ $pedido->id }})"
+                                        wire:model="estados.{{ $pedido->id }}" id="estado_{{ $pedido->id }}"
+                                        class="block rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                                        <option value="1" {{ $pedido->estado == 1}}>
+                                            Solicitado</option>
+                                        <option value="2" {{ $pedido->estado == 2}}>
+                                            Cancelado</option>
+                                        <option value="3" {{ $pedido->estado == 3}}>
+                                            Aceptado</option>
+                                        <option value="5" {{ $pedido->estado == 4}}>
+                                            Finalizado</option>
+                                        <option value="6" {{ $pedido->estado == 5}}>
+                                            Pagado</option>
+                                    </select>
+                                </div>
+                            </td>
+                            @endif
 
 
                         </tr>

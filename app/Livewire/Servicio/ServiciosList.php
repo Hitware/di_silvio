@@ -51,22 +51,22 @@ class ServiciosList extends Component
 
     public function actualizarEstado($servicioId)
     {
-        $experiencia = Servicio::find($servicioId);
+        $servicio = Servicio::find($servicioId);
 
-        if ($experiencia) {
-            $experiencia->estado = $this->estados[$servicioId];
-            $experiencia->save();
+        if ($servicio) {
+            $servicio->estado = $this->estados[$servicioId];
+            $servicio->save();
         }
     }
     
 
     public function actualizarProveedor($servicioId)
     {
-        $experiencia = Servicio::find($servicioId);
+        $servicio = Servicio::find($servicioId);
 
-        if ($experiencia) {
-            $experiencia->id_proveedor = $this->proveedor[$servicioId];
-            $experiencia->save();
+        if ($servicio) {
+            $servicio->id_proveedor = $this->proveedor[$servicioId];
+            $servicio->save();
         }
     }
 }
