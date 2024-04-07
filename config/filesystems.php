@@ -44,14 +44,6 @@ return [
             'throw' => false,
         ],
 
-        'camara_comercio' => [
-            'driver' => 'local',
-            'root' => storage_path('app/camara_comercio'),
-            'url' => env('APP_URL').'/storage',
-            'visibility' => 'public',
-            'throw' => false,
-        ],
-
         'rut' => [
             'driver' => 'local',
             'root' => storage_path('app/rut'),
@@ -68,22 +60,42 @@ return [
             'throw' => false,
         ],
 
-        'rnt' => [
+
+        'archivos_cuenta' => [
             'driver' => 'local',
-            'root' => storage_path('app/rnt'),
+            'root' => storage_path('app/archivos_cuenta'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
             'throw' => false,
         ],
 
-        'imagenes_experiencias' => [
+        'evidencias' => [
             'driver' => 'local',
-            'root' => storage_path('app/imagenes_experiencias'),
+            'root' => storage_path('app/evidencias'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
             'throw' => false,
         ],
 
+        'ordenes_servicio_compra' => [
+            'driver' => 'local',
+            'root' => storage_path('app/ordenes_servicio_compra'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+        
+        'facturas' => [
+            'driver' => 'local',
+            'root' => storage_path('app/facturas'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+       
+
+        
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

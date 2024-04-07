@@ -7,5 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sede extends Model
 {
+
     use HasFactory;
+
+    protected $table = 'sedes';
+
+    protected $fillable = [
+        'nombre_sede',
+        'direccion_sede',
+        'telefono_sede',
+        'nombre_encargado',
+        'estado_sede',
+    ];
 }

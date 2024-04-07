@@ -82,10 +82,10 @@
 
                     @if (Auth::user()->rol==1)
                         @include('menu.admin')
-                    @elseif(Auth::user()->rol==2)
-                        @include('menu.verificador')
-                    @elseif (Auth::user()->rol==5)
+                    @elseif (Auth::user()->rol==2 || Auth::user()->rol==3 || Auth::user()->rol==4 )
                         @include('menu.operador')
+                    @elseif(Auth::user()->rol==6)
+                        @include('menu.proveedor')
                     @endif
 
                     <li class="px-5 hidden md:block">

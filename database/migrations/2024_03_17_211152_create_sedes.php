@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('direccion_sede',100);
             $table->string('telefono_sede',20);
             $table->string('nombre_encargado',50);
+            $table->string('estado_sede',2);
             $table->timestamps();
         });
     }
@@ -26,6 +27,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('sedes');
+
     }
 };
